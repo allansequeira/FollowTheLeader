@@ -54,6 +54,10 @@ class GameScene: SKScene {
 
         // position zombie sprite
         zombie.position = CGPoint(x: 400, y: 400)
+        // scale zombie to 2x
+        zombie.setScale(2.0)
+        
+        // add zombie sprite to scene
         addChild(zombie)
         
         // get size of sprite
