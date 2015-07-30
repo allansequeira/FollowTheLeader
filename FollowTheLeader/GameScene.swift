@@ -13,10 +13,18 @@ class GameScene: SKScene {
     // constants
     let zombie:SKSpriteNode
     
+    // keep track of the last time SpriteKit called update(...)
+    var lastUpdateTime: NSTimeInterval
+    // keep track of the delta time since the last update(...)
+    var dt: NSTimeInterval
     
     override init(size: CGSize) {
         // create zombie sprite
         self.zombie = SKSpriteNode(imageNamed: "zombie1")
+        
+        lastUpdateTime = 0
+        dt = 0
+        
         super.init(size: size)
     }
     
@@ -63,6 +71,23 @@ class GameScene: SKScene {
         // get size of sprite
         let mySize = background.size
         println("Size: \(mySize)")
+        
+    }
+    
+    // update(...) is called each frame by SpriteKit.
+    override func update(currentTime: NSTimeInterval) {
+        // calculate the time since the last call to update() and store that in dt
+        if lastUpdateTime > 0 {
+            dt = currentTime - lastUpdateTime
+        } else {
+            dt = 0
+        }
+        lastUpdateTime = currentTime
+        println("\(dt * 1000) milliseconds since last update")
+        
+        // move zombie left to right. i.e move the zombie along the x-axis, keep 
+        // same position along the y-axis
+        zombie.position = CGPoint(x: zombie.position.x + 4, y: zombie.position.y)
         
     }
     
