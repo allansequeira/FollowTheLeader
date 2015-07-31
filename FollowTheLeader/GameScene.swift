@@ -18,6 +18,11 @@ class GameScene: SKScene {
     // keep track of the delta time since the last update(...)
     var dt: NSTimeInterval
     
+    // in 1 sec, zombie should move 480 pointss (1/4 of the scene width)
+    let zombieMovePointsPerSec: CGFloat = 480
+    
+    var velocity = CGPointZero
+    
     override init(size: CGSize) {
         // create zombie sprite
         self.zombie = SKSpriteNode(imageNamed: "zombie1")
@@ -89,6 +94,16 @@ class GameScene: SKScene {
         // same position along the y-axis
         zombie.position = CGPoint(x: zombie.position.x + 4, y: zombie.position.y)
         
+    }
+    
+    // Reusable method that takes the sprite to be moved and 
+    // a velocity vector by which to move it
+    func moveSprite(sprite: SKSpriteNode, velocity: CGPoint) {
+        
+        let amountToMove = CGPoint(x: velocity.x * CGFloat(dt), y: velocity.y * CGFloat(dt))
+        println("Amount to move: \(amountToMove)")
+        
+        sprite.position = CGPoint(x: sprite.position.x + amountToMove.x, y: sprite.position.y + amountToMove.y)
     }
     
 }
