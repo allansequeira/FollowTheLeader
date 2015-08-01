@@ -111,4 +111,28 @@ class GameScene: SKScene {
         sprite.position = CGPoint(x: sprite.position.x + amountToMove.x, y: sprite.position.y + amountToMove.y)
     }
     
+    // Move the zombie towards the point the player taps and 
+    // keep moving even after passing the tap location, until the player taps
+    // another location to draw his attention
+    func moveZombieToward(location: CGPoint) {
+        // 1. figure out the offset between the location of the player's tap and the 
+        //    location of the zombie. 
+        //    You can get this by subtracting the zombie's position from the tap position
+        //          tap position - zombie position = offset
+        //    By subtracting these two positions, you get a vector with a direction and a length.
+        let offset = CGPoint(x: location.x - zombie.position.x, y: location.y - zombie.position.y)
+        
+        // 2. find the length of the offset vector
+        //    Think of the offset vector as the hypotenuse of a right triangle, where the lengths
+        //    of the other two sides of the triangle are defined by x and y components of the vector
+        //          
+        //
+        //    So to find the length of the hypotenuse, you can use the Pythagorean theorem
+        //          sqrt(a^2 + b^2) = c
+        //    where a = offset.x, b = offset.y, c = length of hypotenuse
+        set length = sqrt(Double(offset.x * offset.x + offset.y * offset.y))
+        
+        
+    }
+    
 }
