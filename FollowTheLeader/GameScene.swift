@@ -130,7 +130,7 @@ class GameScene: SKScene {
         //    So to find the length of the hypotenuse, you can use the Pythagorean theorem
         //          sqrt(a^2 + b^2) = c
         //    where a = offset.x, b = offset.y, c = length of hypotenuse
-        set length = sqrt(Double(offset.x * offset.x + offset.y * offset.y))
+        let length = sqrt(Double(offset.x * offset.x + offset.y * offset.y))
         
         
     }
