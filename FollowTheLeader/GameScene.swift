@@ -94,9 +94,14 @@ class GameScene: SKScene {
         // move zombie left to right. i.e move the zombie along the x-axis, keep
         // same position along the y-axis
         // zombie.position = CGPoint(x: zombie.position.x + 4, y: zombie.position.y)
+        
         // Iteration 2:
         // sprite's position + amount to move = new position of sprite
-        moveSprite(zombie, velocity: CGPoint(x: zombieMovePointsPerSec, y: 0))
+        // moveSprite(zombie, velocity: CGPoint(x: zombieMovePointsPerSec, y: 0))
+        
+        // Iteration 3:
+        // moving towards touches
+        moveSprite(zombie, velocity: velocity)
         
     }
     
@@ -132,7 +137,42 @@ class GameScene: SKScene {
         //    where a = offset.x, b = offset.y, c = length of hypotenuse
         let length = sqrt(Double(offset.x * offset.x + offset.y * offset.y))
         
+        // 3. make the offset vector a set/certain length
+        //    Currently you have an offset vector where
+        //      - the direction of the vector points towards where the zombie should go
+        //      - the length of the vector is the length of the line b/w the zombie's current position
+        //        and the tap position
+        //    What you want is a velocity vector where
+        //      - the direction of the vector points towards where the zombie should go
+        //      - the length is "zombieMovePointsPerSec" (constant defined above, 480 points per second)
+        //    To do the above, we convert the offset vector to a unit vector (vector of length 1). You
+        //    do this by dividing the offset vector's x and y components by the offset vector's length.
+        //    The process of converting a vector into a unit vector is called "normalizing" a vector
+        //    Once you have this unit vector (of length 1), it's easy to multiply it by 
+        //    zombieMovePointsPerSec to make it the exact length you want
+        //    
+        let direction = CGPoint(x: offset.x / CGFloat(length), y: offset.y / CGFloat(length))
+        velocity = CGPoint(x: direction.x * zombieMovePointsPerSec, y: direction.y * zombieMovePointsPerSec)
+        // So now we have a velocity vector with correct direction and length
         
     }
+    
+    // hooking up touch events
+    func sceneTouched(touchLocation: CGPoint) {
+        moveZombieToward(touchLocation)
+    }
+    
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        let touch = touches.first as! UITouch
+        let touchLocation = touch.locationInNode(self)
+        sceneTouched(touchLocation)
+    }
+    
+    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
+        let touch = touches.first as! UITouch
+        let touchLocation = touch.locationInNode(self)
+        sceneTouched(touchLocation)
+    }
+    
     
 }
