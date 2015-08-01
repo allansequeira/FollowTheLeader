@@ -18,7 +18,7 @@ class GameScene: SKScene {
     // keep track of the delta time since the last update(...)
     var dt: NSTimeInterval
     
-    // in 1 sec, zombie should move 480 pointss (1/4 of the scene width)
+    // in 1 sec, zombie should move 480 points (1/4 of the scene width)
     let zombieMovePointsPerSec: CGFloat = 480
     
     var velocity = CGPointZero
@@ -90,14 +90,19 @@ class GameScene: SKScene {
         lastUpdateTime = currentTime
         println("\(dt * 1000) milliseconds since last update")
         
-        // move zombie left to right. i.e move the zombie along the x-axis, keep 
+        // Iteration 1:
+        // move zombie left to right. i.e move the zombie along the x-axis, keep
         // same position along the y-axis
-        zombie.position = CGPoint(x: zombie.position.x + 4, y: zombie.position.y)
+        // zombie.position = CGPoint(x: zombie.position.x + 4, y: zombie.position.y)
+        // Iteration 2:
+        // sprite's position + amount to move = new position of sprite
+        moveSprite(zombie, velocity: CGPoint(x: zombieMovePointsPerSec, y: 0))
         
     }
     
-    // Reusable method that takes the sprite to be moved and 
+    // Reusable method that takes the sprite to be moved and
     // a velocity vector by which to move it
+    // sprite's position + amount to move = new position of sprite
     func moveSprite(sprite: SKSpriteNode, velocity: CGPoint) {
         
         let amountToMove = CGPoint(x: velocity.x * CGFloat(dt), y: velocity.y * CGFloat(dt))
