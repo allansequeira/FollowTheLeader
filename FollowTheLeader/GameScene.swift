@@ -103,6 +103,10 @@ class GameScene: SKScene {
         // moving towards touches
         moveSprite(zombie, velocity: velocity)
         
+        // Iteration 4:
+        // bounds check - keep the zombie inside the screen
+        boundsCheckZombie()
+        
     }
     
     // Reusable method that takes the sprite to be moved and
@@ -174,5 +178,35 @@ class GameScene: SKScene {
         sceneTouched(touchLocation)
     }
     
+    func boundsCheckZombie() {
+        // constants for bottom-left and top-right coordinates of the scene
+        let bottomLeft = CGPointZero
+        let topRight = CGPoint(x: size.width, y: size.height)
+        
+        // check the zombie's position to see if it's beyond or at any of the screen (scene) edges
+        // If it is, clamp the position and reverse the appropriate velocty component to make the
+        // zombie bounce in the opposite direction
+        if zombie.position.x <= bottomLeft.x {
+            zombie.position.x = bottomLeft.x
+            velocity.x = -velocity.x
+        }
+        
+        if zombie.position.x >= topRight.x {
+            zombie.position.x = topRight.x
+            velocity.x = -velocity.x
+        }
+        
+        if zombie.position.y <= bottomLeft.y {
+            zombie.position.y = bottomLeft.y
+            velocity.y = -velocity.y
+        }
+        
+        if zombie.position.y >= topRight.y {
+            zombie.position.y = topRight.y
+            velocity.y = -velocity.y
+        }
+        
+        
+    }
     
 }
