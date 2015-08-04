@@ -46,7 +46,7 @@ class GameScene: SKScene {
         let playableMargin = (size.height - playableHeight) / 2.0
         
         // put it all together and make a centered rectangle with max aspect ratio
-        playableRect = CGRect(x:0, y:playableMargin, width: size.width, height: playableHeight)
+        playableRect = CGRect(x: 0, y: playableMargin, width: size.width, height: playableHeight)
         
         // call initializer on super class
         super.init(size: size)
@@ -134,6 +134,8 @@ class GameScene: SKScene {
         // bounds check - keep the zombie inside the screen
         boundsCheckZombie()
         
+        // rotate zombie so he is facing in the direction he is moving
+        rotateSprite(zombie, direction: velocity)
     }
     
     // Reusable method that takes the sprite to be moved and
@@ -234,6 +236,35 @@ class GameScene: SKScene {
         }
     }
     
+    
+    // Rotate a given sprite (in this case, zombie) by a computed angle
+    //
+    // We have to find the angle to rotate to get the zombie to face in that direction he will moving
+    // Start by thinking of the "direction" vector as the hypotenuse of a right triangle. You want 
+    // to find the angle (a) across from the opposite side since the zombie is facing right.
+    //         /|
+    //        / |
+    //       /  | opposite (direction.y)
+    //      /)a |
+    //      ----
+    //      adjacent (direction.x)
+    //
+    // Since we have the lengths of the opposite and adjacent sides, we can find the angle of rotation
+    // using the formula
+    //      tan (angle) =  opposite / adjacent. Therefore, angle = arctan(opposite/adjacent)
+    // TIP: From Trigonometry, SOH CAH TOA
+    // NOTE: The below computation works because the zombie is facing right. If the zombie image 
+    // were instead facing toward the top of the screen, you’d have to add an additional
+    // rotation to compensate because an angle of 0 points to the right
+    func rotateSprite(sprite: SKSpriteNode, direction: CGPoint) {
+        sprite.zRotation = CGFloat(atan2(Double(direction.y), Double(direction.x)))
+    }
+    
+    
+    
+    // ----------- Handy methods for debugging -----------
+    
+    // draws a rectangular playable area
     func debugDrawPlayableArea() {
         let shape = SKShapeNode()
         let path = CGPathCreateMutable()
