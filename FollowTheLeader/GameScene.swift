@@ -23,19 +23,44 @@ class GameScene: SKScene {
     
     var velocity = CGPointZero
     
+    let playableRect: CGRect
+    
     override init(size: CGSize) {
         // create zombie sprite
         self.zombie = SKSpriteNode(imageNamed: "zombie1")
         
+        // initialize lastUpdateTime and delta time
         lastUpdateTime = 0
         dt = 0
         
+        // support aspect ratios from 3:2 (1.33) to 16:9 (1.77). Creating constant for
+        // max aspect ratio supported 16:9 (1.77)
+        let maxAspectRatio:CGFloat = 16.0/9.0
+        
+        // with aspect fit, regardless of aspect ratio the playable width will be equal to
+        // scene width. For playable height, divide scene with by max aspect ratio
+        let playableHeight = size.width / maxAspectRatio
+        
+        // To center the playable rectangle on the screen, determine the margin on the top and bottom
+        // by subtracting the playable height from scene height and dividing the result by 2
+        let playableMargin = (size.height - playableHeight) / 2.0
+        
+        // put it all together and make a centered rectangle with max aspect ratio
+        playableRect = CGRect(x:0, y:playableMargin, width: size.width, height: playableHeight)
+        
+        // call initializer on super class
         super.init(size: size)
     }
     
     // A way to declare to the compiler and the built program that 
     // I really don't want to be NSCoding-compatible
     // http://stackoverflow.com/questions/25126295/swift-class-does-not-implement-its-superclasss-required-members
+    //
+    // Whenever you override the default initializer of a SpriteKit node, you must also 
+    // override the required NSCoder initializer. This is used when you are 
+    // loading a scene from the scene editor. Since we are not using the scene 
+    // editor in this game, we simply add a placeholder implementation that logs 
+    // an error for now
     required init(coder: NSCoder) {
         fatalError("NSCoding not supported. init(coder:) has not been implemented")
     }
@@ -77,6 +102,8 @@ class GameScene: SKScene {
         let mySize = background.size
         println("Size: \(mySize)")
         
+        // DEBUG: drawing a playable rectangle area on the scene to denote playable area.
+        debugDrawPlayableArea()
     }
     
     // update(...) is called each frame by SpriteKit.
@@ -180,8 +207,8 @@ class GameScene: SKScene {
     
     func boundsCheckZombie() {
         // constants for bottom-left and top-right coordinates of the scene
-        let bottomLeft = CGPointZero
-        let topRight = CGPoint(x: size.width, y: size.height)
+        let bottomLeft = CGPoint(x: 0, y: CGRectGetMinY(playableRect))
+        let topRight = CGPoint(x: size.width, y: CGRectGetMaxY(playableRect))
         
         // check the zombie's position to see if it's beyond or at any of the screen (scene) edges
         // If it is, clamp the position and reverse the appropriate velocty component to make the
@@ -205,8 +232,16 @@ class GameScene: SKScene {
             zombie.position.y = topRight.y
             velocity.y = -velocity.y
         }
-        
-        
+    }
+    
+    func debugDrawPlayableArea() {
+        let shape = SKShapeNode()
+        let path = CGPathCreateMutable()
+        CGPathAddRect(path, nil, playableRect)
+        shape.path = path
+        shape.strokeColor = SKColor.blueColor()
+        shape.lineWidth = 20.0
+        addChild(shape)
     }
     
 }
