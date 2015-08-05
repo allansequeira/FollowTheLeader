@@ -207,6 +207,9 @@ class GameScene: SKScene {
         sceneTouched(touchLocation)
     }
     
+    //
+    // Keep the zombie inside the bounds of a playable area
+    //
     func boundsCheckZombie() {
         // constants for bottom-left and top-right coordinates of the scene
         let bottomLeft = CGPoint(x: 0, y: CGRectGetMinY(playableRect))
