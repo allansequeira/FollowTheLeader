@@ -14,6 +14,10 @@ import CoreGraphics
         let testPoint1 = CGPoint(x: 100, y: 100) 
         let testPoint2 = CGPoint(x: 50, y: 50) 
         let testPoint3 = testPoint1 + testPoint2
+
+    And you will be able to multiple/divide points by scalar values as:
+        let testPoint4 = testPoint1 * 2
+        let testPoint5 = testPoint1 / 10
 */
 
 func + (left: CGPoint, right: CGPoint) -> CGPoint {
