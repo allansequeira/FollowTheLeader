@@ -9,6 +9,13 @@
 import Foundation
 import CoreGraphics
 
+/* Utility override operators for addition, subtraction, multiplication, and division on CGPoint 
+   For example, you will be able to add points like this:
+        let testPoint1 = CGPoint(x: 100, y: 100) 
+        let testPoint2 = CGPoint(x: 50, y: 50) 
+        let testPoint3 = testPoint1 + testPoint2
+*/
+
 func + (left: CGPoint, right: CGPoint) -> CGPoint {
     return CGPoint(x: left.x + right.x, y: left.y + right.y)
 }
