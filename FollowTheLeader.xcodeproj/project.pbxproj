@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		884BEDAE1B7466E300FC74C7 /* MyUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884BEDAD1B7466E300FC74C7 /* MyUtils.swift */; };
 		889201891B657B0400227109 /* background1.png in Resources */ = {isa = PBXBuildFile; fileRef = 889201831B657B0400227109 /* background1.png */; };
 		8892018A1B657B0400227109 /* background2.png in Resources */ = {isa = PBXBuildFile; fileRef = 889201841B657B0400227109 /* background2.png */; };
 		8892018B1B657B0400227109 /* MainMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 889201851B657B0400227109 /* MainMenu.png */; };
@@ -33,6 +34,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		884BEDAD1B7466E300FC74C7 /* MyUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyUtils.swift; sourceTree = "<group>"; };
 		889201831B657B0400227109 /* background1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background1.png; sourceTree = "<group>"; };
 		889201841B657B0400227109 /* background2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background2.png; sourceTree = "<group>"; };
 		889201851B657B0400227109 /* MainMenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MainMenu.png; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				88EE614D1B5FFF3D00A7B50B /* Images.xcassets */,
 				88EE614F1B5FFF3D00A7B50B /* LaunchScreen.xib */,
 				88EE61401B5FFF3D00A7B50B /* Supporting Files */,
+				884BEDAD1B7466E300FC74C7 /* MyUtils.swift */,
 			);
 			path = FollowTheLeader;
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 				88EE61471B5FFF3D00A7B50B /* GameScene.swift in Sources */,
 				88EE61491B5FFF3D00A7B50B /* GameViewController.swift in Sources */,
 				88EE61431B5FFF3D00A7B50B /* AppDelegate.swift in Sources */,
+				884BEDAE1B7466E300FC74C7 /* MyUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
