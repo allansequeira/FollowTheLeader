@@ -16,3 +16,7 @@ func + (left: CGPoint, right: CGPoint) -> CGPoint {
 func += (inout left: CGPoint, right: CGPoint) {
     left = left + right
 }
+
+func - (left: CGPoint, right: CGPoint) -> CGPoint {
+    return CGPoint(x: left.x - right.x, y: left.y - right.y)
+}
