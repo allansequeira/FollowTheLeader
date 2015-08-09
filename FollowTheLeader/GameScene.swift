@@ -162,7 +162,9 @@ class GameScene: SKScene {
         //    You can get this by subtracting the zombie's position from the tap position
         //          tap position - zombie position = offset
         //    By subtracting these two positions, you get a vector with a direction and a length.
-        let offset = CGPoint(x: location.x - zombie.position.x, y: location.y - zombie.position.y)
+        // using helper functions (-) from MyUtils.swift
+        //let offset = CGPoint(x: location.x - zombie.position.x, y: location.y - zombie.position.y)
+        let offset = location - zombie.position
         
         // 2. find the length of the offset vector
         //    Think of the offset vector as the hypotenuse of a right triangle, where the lengths
