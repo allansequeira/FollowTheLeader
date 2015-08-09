@@ -142,11 +142,15 @@ class GameScene: SKScene {
     // a velocity vector by which to move it
     // sprite's position + amount to move = new position of sprite
     func moveSprite(sprite: SKSpriteNode, velocity: CGPoint) {
-        
-        let amountToMove = CGPoint(x: velocity.x * CGFloat(dt), y: velocity.y * CGFloat(dt))
+
+        // using helper functions (*) from MyUtils.swift
+        //let amountToMove = CGPoint(x: velocity.x * CGFloat(dt), y: velocity.y * CGFloat(dt))
+        let amountToMove = velocity * CGFloat(dt)
         println("Amount to move: \(amountToMove)")
         
-        sprite.position = CGPoint(x: sprite.position.x + amountToMove.x, y: sprite.position.y + amountToMove.y)
+        // using helper functions (+=) from MyUtils.swift
+        //sprite.position = CGPoint(x: sprite.position.x + amountToMove.x, y: sprite.position.y + amountToMove.y)
+        sprite.position += amountToMove
     }
     
     // Move the zombie towards the point the player taps and 
