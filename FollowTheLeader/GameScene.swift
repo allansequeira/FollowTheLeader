@@ -191,7 +191,9 @@ class GameScene: SKScene {
         //    zombieMovePointsPerSec to make it the exact length you want
         //    
         let direction = CGPoint(x: offset.x / CGFloat(length), y: offset.y / CGFloat(length))
-        velocity = CGPoint(x: direction.x * zombieMovePointsPerSec, y: direction.y * zombieMovePointsPerSec)
+        // using helper functions (*) from MyUtils.swift
+        //velocity = CGPoint(x: direction.x * zombieMovePointsPerSec, y: direction.y * zombieMovePointsPerSec)
+        velocity = direction * zombieMovePointsPerSec
         // So now we have a velocity vector with correct direction and length
         
     }
@@ -266,7 +268,9 @@ class GameScene: SKScene {
     // were instead facing toward the top of the screen, you’d have to add an additional
     // rotation to compensate because an angle of 0 points to the right
     func rotateSprite(sprite: SKSpriteNode, direction: CGPoint) {
-        sprite.zRotation = CGFloat(atan2(Double(direction.y), Double(direction.x)))
+        // using helper functions (CGPoint extension "angle") from MyUtils.swift
+        //sprite.zRotation = CGFloat(atan2(Double(direction.y), Double(direction.x)))
+        sprite.zRotation = direction.angle
     }
     
     
