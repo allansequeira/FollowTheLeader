@@ -25,6 +25,9 @@ class GameScene: SKScene {
     
     let playableRect: CGRect
     
+    // optional to help with stopping the zombie at the last location touched
+    var lastTouchLocation: CGPoint?
+    
     override init(size: CGSize) {
         // create zombie sprite
         self.zombie = SKSpriteNode(imageNamed: "zombie1")
