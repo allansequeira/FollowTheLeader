@@ -22,7 +22,8 @@ class GameScene: SKScene {
     let zombieMovePointsPerSec: CGFloat = 480
     
     var velocity = CGPointZero
-    
+
+    // playable area
     let playableRect: CGRect
     
     // optional to help with stopping the zombie at the last location touched
