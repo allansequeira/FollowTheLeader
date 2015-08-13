@@ -204,6 +204,11 @@ class GameScene: SKScene {
     
     // hooking up touch events
     func sceneTouched(touchLocation: CGPoint) {
+        // updating property lastTouchLocation with the location of the touch whenever 
+        // player touches the scene
+        lastTouchLocation = touchLocation
+        
+        // move the zombie towards the touch location
         moveZombieToward(touchLocation)
     }
     
