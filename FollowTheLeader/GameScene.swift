@@ -121,25 +121,38 @@ class GameScene: SKScene {
         lastUpdateTime = currentTime
         println("\(dt * 1000) milliseconds since last update")
         
-        // Iteration 1:
-        // move zombie left to right. i.e move the zombie along the x-axis, keep
-        // same position along the y-axis
-        // zombie.position = CGPoint(x: zombie.position.x + 4, y: zombie.position.y)
+        // To stop the zombie at the touch location, check the distance between the last touch
+        // location and the zombie position. If that remaining distance is less than or equal to
+        // the amount the zombie will move this frame (zombieMovePointsPerSec * dt), then set
+        // the zombie position to the lastTouchedLocation and velocity to zero. Otherwise, move 
+        // the zombie (and rotate the sprite as necessary)
+        if let lastTouch = lastTouchLocation {
+            let diff = lastTouch - zombie.position
+            if (diff.length() <= zombieMovePointsPerSec * CGFloat(dt)) {
+                zombie.position = lastTouchLocation!
+                velocity = CGPointZero
+            } else {
+                // Iteration 1:
+                // move zombie left to right. i.e move the zombie along the x-axis, keep
+                // same position along the y-axis
+                // zombie.position = CGPoint(x: zombie.position.x + 4, y: zombie.position.y)
         
-        // Iteration 2:
-        // sprite's position + amount to move = new position of sprite
-        // moveSprite(zombie, velocity: CGPoint(x: zombieMovePointsPerSec, y: 0))
+                // Iteration 2:
+                // sprite's position + amount to move = new position of sprite
+                // moveSprite(zombie, velocity: CGPoint(x: zombieMovePointsPerSec, y: 0))
         
-        // Iteration 3:
-        // moving towards touches
-        moveSprite(zombie, velocity: velocity)
+                // Iteration 3:
+                // moving towards touches
+                moveSprite(zombie, velocity: velocity)
+        
+                // rotate zombie so he is facing in the direction he is moving
+                rotateSprite(zombie, direction: velocity)
+            }
+        }
         
         // Iteration 4:
         // bounds check - keep the zombie inside the screen
         boundsCheckZombie()
-        
-        // rotate zombie so he is facing in the direction he is moving
-        rotateSprite(zombie, direction: velocity)
     }
     
     // Reusable method that takes the sprite to be moved and
