@@ -104,8 +104,19 @@ extension CGPoint {
     }
 }
 
+
 let π = CGFloat(M_PI)
 
+// This function returns the shortest angle between 2 angles. It's not as simple as 
+// subtracting the two angles for 2 reasons:
+// i) Angles "wrap around" after 360 degrees (2 * M_PI). In other words, 30 degrees
+//    and 390 degrees represent the same angle
+// ii) Sometimes the shortest way to rotate between 2 angles is to go left, and other 
+//     times to go right. For example, if you start at 0 degrees and want to turn 270 
+//     degrees, it shorter to turn -90 degrees than 270 degrees. You don't want the
+//     zombie to turn the long way around
+// So this routine finds the difference between the 2 angles, chops of any amount
+// greater than 360 degrees and decides if it's faster to go left or right.
 func shortestAngleBetween(angle1: CGFloat, angle2: CGFloat) -> CGFloat {
     let twoπ = π * 2
     var angle = (angle2 - angle1) % twoπ
