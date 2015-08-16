@@ -148,8 +148,8 @@ class GameScene: SKScene {
                 moveSprite(zombie, velocity: velocity)
         
                 // rotate zombie smoothly over time so he is facing in the direction he is moving
-                rotateSprite(zombie, direction: velocity)
-                //rotateSprite(zombie, direction: velocity, rotateRadiansPerSec: zombieRotateRadiansPerSec)
+                //rotateSprite(zombie, direction: velocity)
+                rotateSprite(zombie, direction: velocity, rotateRadiansPerSec: zombieRotateRadiansPerSec)
             }
         }
         
@@ -303,18 +303,10 @@ class GameScene: SKScene {
     // Rotate a given sprite (in this case, zombie) by a computed angle and smoothly over 
     // time (zombieRotateRadiansPerSec) to face in the new direction
     func rotateSprite(sprite: SKSpriteNode, direction: CGPoint, rotateRadiansPerSec: CGFloat) {
-        
-        // Rotating the sprite (zombie) smoothly over time to face the new direction. 
-        // Hence commenting this off since this rotates instantly.
-        /*
-        // using helper functions (CGPoint extension "angle") from MyUtils.swift
-        //sprite.zRotation = CGFloat(atan2(Double(direction.y), Double(direction.x)))
-        sprite.zRotation = direction.angle
-        */
-        
+                
         // Use shortestAngleBetween() to find the distance between the current angle (sprite.zRotation) and
         // the target angle (velocty.angle - since velocity/direction is where there zombie should be facing).
-        let shortest = shortestAngleBetween(sprite.zRotation, velocity.angle)
+        let shortest = shortestAngleBetween(sprite.zRotation, direction.angle)
         
         // Figure out the amount to rotate this frame based on rotateRadiansPerSec and dt. If the 
         // absolute value of shortest is less than (rotateRadiansPerSec * dt) then use that.
