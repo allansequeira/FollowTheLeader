@@ -29,7 +29,7 @@ class GameScene: SKScene {
     // optional to help with stopping the zombie at the last location touched
     var lastTouchLocation: CGPoint?
     
-    let zombieRotateRadiansPerSec: CGFloat = 2.0 * π
+    let zombieRotateRadiansPerSec: CGFloat = 4.0 * π
     
     override init(size: CGSize) {
         // create zombie sprite
@@ -148,7 +148,8 @@ class GameScene: SKScene {
                 moveSprite(zombie, velocity: velocity)
         
                 // rotate zombie smoothly over time so he is facing in the direction he is moving
-                rotateSprite(zombie, direction: velocity, rotateRadiansPerSec: zombieRotateRadiansPerSec)
+                rotateSprite(zombie, direction: velocity)
+                //rotateSprite(zombie, direction: velocity, rotateRadiansPerSec: zombieRotateRadiansPerSec)
             }
         }
         
@@ -291,6 +292,16 @@ class GameScene: SKScene {
     // NOTE: The below computation works because the zombie is facing right. If the zombie image 
     // were instead facing toward the top of the screen, you’d have to add an additional
     // rotation to compensate because an angle of 0 points to the right
+    func rotateSprite(sprite: SKSpriteNode, direction: CGPoint) {
+        
+        // using helper functions (CGPoint extension "angle") from MyUtils.swift
+        //sprite.zRotation = CGFloat(atan2(Double(direction.y), Double(direction.x)))
+        sprite.zRotation = direction.angle
+    }
+    
+
+    // Rotate a given sprite (in this case, zombie) by a computed angle and smoothly over 
+    // time (zombieRotateRadiansPerSec) to face in the new direction
     func rotateSprite(sprite: SKSpriteNode, direction: CGPoint, rotateRadiansPerSec: CGFloat) {
         
         // Rotating the sprite (zombie) smoothly over time to face the new direction. 
