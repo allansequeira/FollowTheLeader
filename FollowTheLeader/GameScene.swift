@@ -99,7 +99,7 @@ class GameScene: SKScene {
         // position zombie sprite
         zombie.position = CGPoint(x: 400, y: 400)
         // scale zombie to 2x
-        zombie.setScale(2.0)
+        //zombie.setScale(2.0)
         
         // add zombie sprite to scene
         addChild(zombie)
@@ -303,7 +303,7 @@ class GameScene: SKScene {
     // Rotate a given sprite (in this case, zombie) by a computed angle and smoothly over 
     // time (zombieRotateRadiansPerSec) to face in the new direction
     func rotateSprite(sprite: SKSpriteNode, direction: CGPoint, rotateRadiansPerSec: CGFloat) {
-                
+        
         // Use shortestAngleBetween() to find the distance between the current angle (sprite.zRotation) and
         // the target angle (velocty.angle - since velocity/direction is where there zombie should be facing).
         let shortest = shortestAngleBetween(sprite.zRotation, direction.angle)
