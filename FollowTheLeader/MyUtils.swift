@@ -118,7 +118,7 @@ let π = CGFloat(M_PI)
 // So this routine finds the difference between the 2 angles, chops of any amount
 // greater than 360 degrees and decides if it's faster to go left or right.
 func shortestAngleBetween(angle1: CGFloat, angle2: CGFloat) -> CGFloat {
-    let twoπ = π * 2
+    let twoπ = π * 2.0
     var angle = (angle2 - angle1) % twoπ
     if (angle >= π) {
         angle = angle - twoπ
