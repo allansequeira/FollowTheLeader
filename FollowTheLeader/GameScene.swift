@@ -121,7 +121,7 @@ class GameScene: SKScene {
             dt = 0
         }
         lastUpdateTime = currentTime
-        println("\(dt * 1000) milliseconds since last update")
+        //println("\(dt * 1000) milliseconds since last update")
         
         // To stop the zombie at the touch location, check the distance between the last touch
         // location and the zombie position. If that remaining distance is less than or equal to
@@ -311,10 +311,12 @@ class GameScene: SKScene {
         // Figure out the amount to rotate this frame based on rotateRadiansPerSec and dt. If the 
         // absolute value of shortest is less than (rotateRadiansPerSec * dt) then use that.
         let amountToRotate = min(rotateRadiansPerSec * CGFloat(dt), abs(shortest))
+        println("dt : \(dt), rotateRadiansPerSec * CGFloat(dt) :\(rotateRadiansPerSec * CGFloat(dt)), shortest: \(shortest)")
         
         // Add amountToRotate to the sprite’s zRotation — but multiply it by sign() first, so that 
         // you rotate in the correct direction.
         sprite.zRotation += shortest.sign() * amountToRotate
+        //sprite.zRotation = amountToRotate
     }
     
     
