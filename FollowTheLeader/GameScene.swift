@@ -29,6 +29,8 @@ class GameScene: SKScene {
     // optional to help with stopping the zombie at the last location touched
     var lastTouchLocation: CGPoint?
     
+    let zombieRotateRadiansPerSec: CGFloat = 2.0 * π
+    
     override init(size: CGSize) {
         // create zombie sprite
         self.zombie = SKSpriteNode(imageNamed: "zombie1")
@@ -145,8 +147,8 @@ class GameScene: SKScene {
                 // moving towards touches
                 moveSprite(zombie, velocity: velocity)
         
-                // rotate zombie so he is facing in the direction he is moving
-                rotateSprite(zombie, direction: velocity)
+                // rotate zombie smoothly over time so he is facing in the direction he is moving
+                rotateSprite(zombie, direction: velocity, rotateRadiansPerSec: zombieRotateRadiansPerSec)
             }
         }
         
@@ -289,10 +291,27 @@ class GameScene: SKScene {
     // NOTE: The below computation works because the zombie is facing right. If the zombie image 
     // were instead facing toward the top of the screen, you’d have to add an additional
     // rotation to compensate because an angle of 0 points to the right
-    func rotateSprite(sprite: SKSpriteNode, direction: CGPoint) {
+    func rotateSprite(sprite: SKSpriteNode, direction: CGPoint, rotateRadiansPerSec: CGFloat) {
+        
+        // Rotating the sprite (zombie) smoothly over time to face the new direction. 
+        // Hence commenting this off since this rotates instantly.
+        /*
         // using helper functions (CGPoint extension "angle") from MyUtils.swift
         //sprite.zRotation = CGFloat(atan2(Double(direction.y), Double(direction.x)))
         sprite.zRotation = direction.angle
+        */
+        
+        // Use shortestAngleBetween() to find the distance between the current angle (sprite.zRotation) and
+        // the target angle (velocty.angle - since velocity/direction is where there zombie should be facing).
+        let shortest = shortestAngleBetween(sprite.zRotation, velocity.angle)
+        
+        // Figure out the amount to rotate this frame based on rotateRadiansPerSec and dt. If the 
+        // absolute value of shortest is less than (rotateRadiansPerSec * dt) then use that.
+        let amountToRotate = min(rotateRadiansPerSec * CGFloat(dt), abs(shortest))
+        
+        // Add amountToRotate to the sprite’s zRotation — but multiply it by sign() first, so that 
+        // you rotate in the correct direction.
+        sprite.zRotation += shortest.sign() * amountToRotate
     }
     
     
