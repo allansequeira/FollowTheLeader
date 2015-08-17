@@ -29,6 +29,7 @@ class GameScene: SKScene {
     // optional to help with stopping the zombie at the last location touched
     var lastTouchLocation: CGPoint?
     
+    // how many radians to rotate per sec
     let zombieRotateRadiansPerSec: CGFloat = 4.0 * π
     
     override init(size: CGSize) {
