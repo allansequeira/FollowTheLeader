@@ -320,7 +320,7 @@ class GameScene: SKScene {
         //sprite.zRotation = amountToRotate
     }
     
-    //
+    // spwan enemy 
     func spawnEnemy() {
         // create enemy sprite
         let enemy = SKSpriteNode(imageNamed: "enemy")
