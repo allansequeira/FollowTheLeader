@@ -320,6 +320,18 @@ class GameScene: SKScene {
         //sprite.zRotation = amountToRotate
     }
     
+    //
+    func spawnEnemy() {
+        // create enemy sprite
+        let enemy = SKSpriteNode(imageNamed: "enemy")
+        
+        // position enemy sprite
+        enemy.position = CGPoint(x: size.width + enemy.size.width/2, y: size.height/2)
+        
+        // add enemy sprite to scene
+        addChild(enemy)
+    }
+    
     
     
     // ----------- Handy methods for debugging -----------
