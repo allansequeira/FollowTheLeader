@@ -105,6 +105,9 @@ class GameScene: SKScene {
         // add zombie sprite to scene
         addChild(zombie)
         
+        // spawn enemy
+        spawnEnemy()
+        
         // get size of sprite
         let mySize = background.size
         println("Size: \(mySize)")
@@ -320,7 +323,7 @@ class GameScene: SKScene {
         //sprite.zRotation = amountToRotate
     }
     
-    // spwan enemy 
+    // spwan enemy
     func spawnEnemy() {
         // create enemy sprite
         let enemy = SKSpriteNode(imageNamed: "enemy")
