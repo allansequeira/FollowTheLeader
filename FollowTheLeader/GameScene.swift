@@ -323,7 +323,9 @@ class GameScene: SKScene {
         //sprite.zRotation = amountToRotate
     }
     
-    // spwan enemy
+    // Spawn enemy
+    // Create the zombie sprite and position it at the vertical center of the screen, just out 
+    // of view to the right
     func spawnEnemy() {
         // create enemy sprite
         let enemy = SKSpriteNode(imageNamed: "enemy")
