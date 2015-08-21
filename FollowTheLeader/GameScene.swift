@@ -335,6 +335,11 @@ class GameScene: SKScene {
         
         // add enemy sprite to scene
         addChild(enemy)
+        
+        // create an action to move the sprite to a specified position over a specified duration (in seconds)
+        let actionMove = SKAction.moveTo(CGPoint(x: -enemy.size.width/2, y: enemy.position.y), duration: 2.0)
+        // run the action on the SKNode
+        enemy.runAction(actionMove)
     }
     
     
