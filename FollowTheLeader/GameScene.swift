@@ -342,8 +342,6 @@ class GameScene: SKScene {
         enemy.runAction(actionMove)
     }
     
-    
-    
     // ----------- Handy methods for debugging -----------
     
     // draws a rectangular playable area
