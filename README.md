@@ -6,3 +6,6 @@ Simple iOS game to figure out iOS spritekit.
 
 - Moves the zombie manually at each frame.
 - Moves the enemy using Actions.
+
+TODO:
+- Switch the zombie movement from manual to using Actions
