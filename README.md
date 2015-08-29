@@ -10,7 +10,8 @@ Simple iOS game to figure out iOS spritekit.
 TODO:
 - Switch the zombie movement from manual to using Actions
 - Test zombie movement
-- Move enemy around
+- Move enemy around in different directions
 - Test enemy movement
+
 
 
