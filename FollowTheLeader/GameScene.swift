@@ -343,8 +343,10 @@ class GameScene: SKScene {
         //enemy.runAction(actionMove)
         
         // create a new move action that represents the "mid-point" of the action - the bottom middle
-        // of the playable rectangle
+        // of the playable rectangle (essentially the top of the "V" to the bottom of the "V")
         let actionMidMove = SKAction.moveTo(CGPoint(x: size.width/2, y: CGRectGetMinY(playableRect) + enemy.size.height/2), duration:1.0)
+        // create a new move action to move from bottom of the "V", off-screen to the left
+        let actionMove = SKAction.moveTo(CGPoint(x: -enemy.size.width/2, y: enemy.position.y), duration:1.0)
         
     }
     
