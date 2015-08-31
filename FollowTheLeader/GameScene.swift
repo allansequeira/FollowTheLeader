@@ -337,9 +337,15 @@ class GameScene: SKScene {
         addChild(enemy)
         
         // create an action to move the sprite to a specified position over a specified duration (in seconds)
-        let actionMove = SKAction.moveTo(CGPoint(x: -enemy.size.width/2, y: enemy.position.y), duration: 2.0)
+        //let actionMove = SKAction.moveTo(CGPoint(x: -enemy.size.width/2, y: enemy.position.y), duration: 2.0)
+        
         // run the action on the SKNode
-        enemy.runAction(actionMove)
+        //enemy.runAction(actionMove)
+        
+        // create a new move action that represents the "mid-point" of the action - the bottom middle
+        // of the playable rectangle
+        let actionMidMove = SKAction.moveTo(CGPoint(x: size.width/2, y: CGRectGetMinY(playableRect) + enemy.size.height/2), duration:1.0)
+        
     }
     
     // ----------- Handy methods for debugging -----------
