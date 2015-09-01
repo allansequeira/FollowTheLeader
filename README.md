@@ -12,6 +12,3 @@ TODO:
 - Test zombie movement in different directions
 - Move enemy around in different directions
 - Test enemy movement
-
-
-
