@@ -349,8 +349,12 @@ class GameScene: SKScene {
         let wait = SKAction.waitForDuration(0.25)
         // create a new move action to move from bottom of the "V", off-screen to the left
         let actionMove = SKAction.moveTo(CGPoint(x: -enemy.size.width/2, y: enemy.position.y), duration:1.0)
+        // run own block of code - log out a message, in this case
+        let logMessage = SKAction.runBlock() {
+            println("Reached Bottom")
+        }
         // create the sequence of actions
-        let sequence = SKAction.sequence([actionMidMove, wait, actionMove])
+        let sequence = SKAction.sequence([actionMidMove, logMessage, wait, actionMove])
         // run the sequence of actions
         enemy.runAction(sequence)
     }
