@@ -344,17 +344,24 @@ class GameScene: SKScene {
         
         // create a new move action that represents the "mid-point" of the action - the bottom middle
         // of the playable rectangle (essentially the top of the "V" to the bottom of the "V")
-        let actionMidMove = SKAction.moveTo(CGPoint(x: size.width/2, y: CGRectGetMinY(playableRect) + enemy.size.height/2), duration:1.0)
+        //let actionMidMove = SKAction.moveTo(CGPoint(x: size.width/2, y: CGRectGetMinY(playableRect) + enemy.size.height/2), duration:1.0)
+        // switching to moveByX Action from moveTo since this Action is reversible
+        let actionMidMove = SKAction.moveByX(-size.width/2 - enemy.size.width/2, y: -CGRectGetHeight(playableRect)/2 + enemy.size.height/2, duration:1.0)
         // pause the enemy briefly at the bottom of the screen
         let wait = SKAction.waitForDuration(0.25)
         // create a new move action to move from bottom of the "V", off-screen to the left
-        let actionMove = SKAction.moveTo(CGPoint(x: -enemy.size.width/2, y: enemy.position.y), duration:1.0)
+        //let actionMove = SKAction.moveTo(CGPoint(x: -enemy.size.width/2, y: enemy.position.y), duration:1.0)
+        // switching to moveByX Action from moveTo since this Action is reversible
+        let actionMove = SKAction.moveByX(-size.width/2 - enemy.size.width/2, y: CGRectGetHeight(playableRect)/2 - enemy.size.height/2, duration: 1.0)
         // run own block of code - log out a message, in this case
         let logMessage = SKAction.runBlock() {
             println("Reached Bottom")
         }
-        // create the sequence of actions
-        let sequence = SKAction.sequence([actionMidMove, logMessage, wait, actionMove])
+        // creating reverse actions
+        let reverseMid = actionMidMove.reversedAction()
+        let reverseMove = actionMove.reversedAction()
+        // create the sequence of actions (including the reverse actions)
+        let sequence = SKAction.sequence([actionMidMove, logMessage, wait, actionMove, reverseMove, logMessage, wait, reverseMid])
         // run the sequence of actions
         enemy.runAction(sequence)
     }
