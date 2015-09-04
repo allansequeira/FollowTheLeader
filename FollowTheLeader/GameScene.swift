@@ -358,10 +358,12 @@ class GameScene: SKScene {
             println("Reached Bottom")
         }
         // creating reverse actions
-        let reverseMid = actionMidMove.reversedAction()
-        let reverseMove = actionMove.reversedAction()
+//        let reverseMid = actionMidMove.reversedAction()
+//        let reverseMove = actionMove.reversedAction()
+        // sequence actions are reversible
+        let halfSequence = SKAction.sequence([actionMidMove, logMessage, wait, actionMove])
         // create the sequence of actions (including the reverse actions)
-        let sequence = SKAction.sequence([actionMidMove, logMessage, wait, actionMove, reverseMove, logMessage, wait, reverseMid])
+        let sequence = SKAction.sequence([halfSequence, halfSequence.reversedAction()])
         // run the sequence of actions
         enemy.runAction(sequence)
     }
