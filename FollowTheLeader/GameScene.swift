@@ -366,7 +366,10 @@ class GameScene: SKScene {
         // create the sequence of actions (including the reverse actions)
         let sequence = SKAction.sequence([halfSequence, halfSequence.reversedAction()])
         // run the sequence of actions
-        enemy.runAction(sequence)
+        //enemy.runAction(sequence)
+        // Repeating the sequence forever
+        let repeat = SKAction.repeatActionForever(sequence)
+        enemy.runAction(repeat)
     }
     
     // ----------- Handy methods for debugging -----------
